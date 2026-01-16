@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VedaVerk", "VedaVerk\VedaVe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VedaVerk.Client", "VedaVerk.Client\VedaVerk.Client.csproj", "{99BFA91B-5E75-4478-ADAD-AE35E8E1172F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VedaVerk.Shared", "..\VedaVerk.Shared\VedaVerk.Shared.csproj", "{B4AC872D-1E23-4367-9FD9-174B2CACD02B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{99BFA91B-5E75-4478-ADAD-AE35E8E1172F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99BFA91B-5E75-4478-ADAD-AE35E8E1172F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99BFA91B-5E75-4478-ADAD-AE35E8E1172F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4AC872D-1E23-4367-9FD9-174B2CACD02B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4AC872D-1E23-4367-9FD9-174B2CACD02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4AC872D-1E23-4367-9FD9-174B2CACD02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4AC872D-1E23-4367-9FD9-174B2CACD02B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
