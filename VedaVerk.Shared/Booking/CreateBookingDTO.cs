@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VedaVerk.Shared.Booking
 {
-	internal class CreateBookingDTO
+	public class CreateBookingDTO
 	{
 	}
 }

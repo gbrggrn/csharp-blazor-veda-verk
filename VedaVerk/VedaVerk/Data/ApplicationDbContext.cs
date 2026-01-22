@@ -9,5 +9,6 @@ namespace VedaVerk.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<VegBag> VegBags { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
 	}
 }
