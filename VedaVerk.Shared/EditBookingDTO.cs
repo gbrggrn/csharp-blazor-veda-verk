@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VedaVerk.Shared.Booking
+namespace VedaVerk.Shared
 {
-	public class CreateBookingDTO
+	public class EditBookingDTO
 	{
 	}
 }

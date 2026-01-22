@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VedaVerk.Shared.Admin
+namespace VedaVerk.Shared
 {
-	internal class CreateVegBagDTO
+	public class CreateBookingDTO
 	{
 	}
 }

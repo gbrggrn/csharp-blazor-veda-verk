@@ -2,7 +2,7 @@
 
 namespace VedaVerk.Controllers
 {
-	public class HomeController : Controller
+	public class ProductsController : Controller
 	{
 		public IActionResult Index()
 		{
