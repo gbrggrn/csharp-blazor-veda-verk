@@ -7,7 +7,7 @@ using VedaVerk.Shared.Enums;
 
 namespace VedaVerk.Shared
 {
-	public class EditProductDTO
+	public class ResponseProductDTO
 	{
 		public string? Name { get; set; }
 		public string? Description { get; set; }

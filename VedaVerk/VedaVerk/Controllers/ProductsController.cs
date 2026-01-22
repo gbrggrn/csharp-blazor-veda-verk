@@ -73,27 +73,37 @@ namespace VedaVerk.Controllers
 			return Ok();
 		}
 
-		[HttpPost]
+		[HttpPut("{id}")]
 		[Authorize(Roles = "Admin")]
-		public async Task<IActionResult> Update(Product product)
+		public async Task<IActionResult> Update(int id, EditProductDTO dto)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
 
-			var existingProduct = await _productsRepository.GetByIdAsync(product.Id);
+			var existingProduct = await _productsRepository.GetByIdAsync(id);
 			if (existingProduct == null)
 				return NotFound();
 
-			existingProduct.Name = product.Name;
-			existingProduct.Description = product.Description;
-			existingProduct.Price = product.Price;
-			existingProduct.Capacity = product.Capacity;
-			existingProduct.Type = product.Type;
-			existingProduct.ImageUrl = product.ImageUrl;
+			existingProduct.Name = dto.Name;
+			existingProduct.Description = dto.Description;
+			existingProduct.Price = dto.Price;
+			existingProduct.Capacity = dto.Capacity;
+			existingProduct.Type = dto.Type;
+			existingProduct.ImageUrl = dto.ImageUrl;
 
 			await _productsRepository.UpdateAsync(existingProduct);
 
-			return Ok(existingProduct);
+			var responseDto = new ResponseProductDTO
+			{
+				Name = existingProduct.Name,
+				Description = existingProduct.Description,
+				Price = existingProduct.Price,
+				Capacity = existingProduct.Capacity,
+				Type = existingProduct.Type,
+				ImageUrl = existingProduct.ImageUrl
+			};
+
+			return Ok(responseDto);
 		}
 	}
 }
