@@ -66,5 +66,22 @@ namespace VedaVerk.Controllers
 
 			return Ok("Booking cancelled successfully.");
 		}
+
+		[HttpDelete("{id}")]
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Delete(int id)
+		{
+			if (id <= 0)
+				return BadRequest("ID was 0 or less");
+
+			var booking = _bookingsRepository.GetByIdAsync(id);
+
+			if (booking == null)
+				return NotFound("Booking not found.");
+
+			await _bookingsRepository.DeleteAsync(id);
+
+			return Ok();
+		}
 	}
 }
