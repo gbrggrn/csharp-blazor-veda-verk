@@ -1,7 +1,143 @@
 ﻿@page "/"
+@inject IProductService ProductService
+@inject ILogger<Home> Logger
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Veda Verk | Trädgård</PageTitle>
 
-<h1>Hello, world!</h1>
+<!-- Hero -->
+<div class="hero-section d-flex align-items-center justify-content-center text-center">
+	<div class="content-overlay">
+		<h1 class="display-2 fw-bold text-white">Veda Verk</h1>
+		<p class="lead text-white text-shadow fs-4">Grönsaker • Pizza • Kurser</p>
+	</div>
+</div>
 
-Welcome to your new app.
+<div class="container mt-5">
+	<div class="row g-4">
+
+		<div class="col-md-4">
+			<div class="category-card" @onclick="() => OpenCategory(ProductType.Course)">
+				<img src="/images/course-icon.jpg" class="img-fluid rounded" />
+				<div class="overlay">
+					<h3>Kurser</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="category-card" @onclick="() => OpenCategory(ProductType.VegBag)">
+				<img src="/images/veg-icon.jpg" class="img-fluid rounded" />
+				<div class="overlay">
+					<h3>Grönsakskassar</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="category-card" @onclick="() => OpenCategory(ProductType.Pizza)">
+				<img src="/images/pizza-icon.jpg" class="img-fluid rounded" />
+				<div class="overlay">
+					<h3>Pizza</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ProductListModal
+	Products="filteredProducts"
+	CategoryName="@selectedCategoryName"
+	IsVisible="isListModalOpen"
+	OnClose="CloseListModal"
+	OnProductSelected="OpenBooking"/>
+
+<BookingModal
+	Product="selectedProduct"
+	OnClose="CloseBookingModal"/>
+
+@code {
+	private List<ResponseProductDTO> allProducts = new();
+	private List<ResponseProductDTO> filteredProducts = new();
+	private ResponseProductDTO? selectedProduct = null;
+
+	private bool isListModalOpen = false;
+	private string selectedCategoryName = string.Empty;
+
+	protected override async Task OnInitializedAsync()
+	{
+		allProducts = await ProductService.GetAll();
+	}
+
+	private void OpenCategory(ProductType type)
+	{
+		filteredProducts = allProducts.Where(p => p.Type == type).ToList();
+
+		selectedCategoryName = type switch
+		{
+			ProductType.VegBag => "Boka Upphämtning av Grönsakskasse",
+			ProductType.Pizza => "Boka Upphämtning av Pizza",
+			_ => "Boka Kurs"
+		};
+
+		isListModalOpen = true;
+	}
+
+	private void CloseListModal() => isListModalOpen = false;
+
+	private void OpenBooking(ResponseProductDTO product)
+	{
+		isListModalOpen = false;
+		selectedProduct = product;
+	}
+
+	private void CloseBookingModal() => selectedProduct = null;
+}
+
+<style>
+	.hero-section {
+		height: 70vh;
+		width: 100%;
+
+		background: linear-gradient(to bottom, rgba(255,255,255,0) 60%, rgba(255,255,255,1) 100%),
+		url('images/hero.jpg');
+
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.text-shadow {
+		text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+	}
+
+	.category-card{
+		position: relative;
+		cursor: pointer;
+		overflow: hidden;
+		transition: transform 0.3s ease;
+		border-radius: 10px;
+		height: 250px;
+	}
+
+	.category-card:hover{
+		transform: scale(1.02);
+	}
+
+	.category-card img{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.category-card .overlay{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background: rgba(0,0,0,0.6);
+		color: white;
+		padding: 15px;
+		text-align: center;
+	}
+
+</style>

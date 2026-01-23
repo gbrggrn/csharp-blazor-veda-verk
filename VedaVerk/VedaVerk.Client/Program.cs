@@ -16,13 +16,13 @@ namespace VedaVerk.Client
             builder.Services.AddCascadingAuthenticationState();
             builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
 
-            builder.Services.AddScoped(sp => new HttpClient
+			builder.Services.AddScoped(sp => new HttpClient
             {
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
             });
 
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.AddScoped<IBookingService, BookingService>();
+			builder.Services.AddScoped<IProductService, ProductService>();
+			builder.Services.AddScoped<IBookingService, BookingService>();
 
 			await builder.Build().RunAsync();
         }
