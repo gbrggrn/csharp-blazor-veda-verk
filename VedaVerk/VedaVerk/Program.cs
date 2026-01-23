@@ -5,6 +5,8 @@ using VedaVerk.Client.Pages;
 using VedaVerk.Components;
 using VedaVerk.Components.Account;
 using VedaVerk.Data;
+using VedaVerk.Models.Enitites;
+using VedaVerk.Shared.Enums;
 
 namespace VedaVerk
 {
@@ -70,7 +72,28 @@ namespace VedaVerk
             // Add additional endpoints required by the Identity /Account Razor components.
             app.MapAdditionalIdentityEndpoints();
 
-            app.Run();
+            //!!! Seed test data
+			using (var scope = app.Services.CreateScope())
+			{
+				var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+				context.Database.EnsureCreated();
+
+				if (!context.Products.Any())
+				{
+					context.Products.AddRange(new List<Product>
+		            {
+			            new Product { Name = "Höstkasse (Small)", Price = 250, Type = ProductType.VegBag },
+			            new Product { Name = "Höstkasse (Large)", Price = 450, Type = ProductType.VegBag },
+			            new Product { Name = "Pizza Friday", Price = 145, Type = ProductType.Pizza }
+		            });
+
+					context.SaveChanges();
+				}
+			}
+            //!!! End seed test data
+
+			app.Run();
         }
     }
 }

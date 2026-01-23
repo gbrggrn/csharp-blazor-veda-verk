@@ -49,7 +49,7 @@ namespace VedaVerk.Controllers
 			return Ok(responseDto);
 		}
 
-		[HttpDelete("{íd}")]
+		[HttpPut("{id}")]
 		public async Task<IActionResult> Cancel(int id, [FromQuery] Guid token)
 		{
 			var booking = _bookingsRepository.GetByIdAsync(id).Result;

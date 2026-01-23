@@ -1,23 +1,34 @@
-﻿using VedaVerk.Client.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Net.Http.Json;
+using VedaVerk.Client.Services.Interfaces;
 using VedaVerk.Shared.DTOs;
 
 namespace VedaVerk.Client.Services.Implementations
 {
-	public class BookingService : IBookingService
+	public class BookingService (HttpClient httpClient) : IBookingService
 	{
-		public Task Cancel(int id, Guid token)
+		private readonly HttpClient _httpClient = httpClient;
+
+		public async Task<bool> Cancel(int id, Guid token)
 		{
-			throw new NotImplementedException();
+			var response = await _httpClient.PutAsync($"/api/Bookings/{id}?token={token}", null);
+
+			return response.IsSuccessStatusCode;
 		}
 
-		public Task<bool> Create(CreateBookingDTO dto)
+		public async Task<bool> Create(CreateBookingDTO dto)
 		{
-			throw new NotImplementedException();
+			var response = await _httpClient.PostAsJsonAsync("/api/Bookings", dto);
+
+			return response.IsSuccessStatusCode;
 		}
 
-		public Task<bool> Delete(int id)
+		[Authorize(Roles = "Admin")]
+		public async Task<bool> Delete(int id)
 		{
-			throw new NotImplementedException();
+			var response = await _httpClient.DeleteAsync($"/api/Bookings/{id}");
+
+			return response.IsSuccessStatusCode;
 		}
 	}
 }

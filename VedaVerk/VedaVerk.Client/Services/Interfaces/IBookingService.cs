@@ -5,7 +5,7 @@ namespace VedaVerk.Client.Services.Interfaces
 	public interface IBookingService
 	{
 		Task<bool> Create(CreateBookingDTO dto);
-		Task Cancel(int id, Guid token);
+		Task<bool> Cancel(int id, Guid token);
 		Task<bool> Delete(int id);
 	}
 }

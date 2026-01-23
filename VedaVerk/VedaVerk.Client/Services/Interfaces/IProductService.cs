@@ -4,9 +4,11 @@ namespace VedaVerk.Client.Services.Interfaces
 {
 	public interface IProductService
 	{
-		Task GetAll();
-		Task GetById(int id);
+		Task <List<ResponseProductDTO>> GetAll();
+		Task <ResponseProductDTO> GetById(int id);
 		Task<bool> Create(CreateProductDTO dto);
 		Task<bool> CheckAvailability(int productId, int quantity);
+		Task<bool> Update(int id, EditProductDTO dto);
+		Task<bool> Delete(int id);
 	}
 }

@@ -17,6 +17,23 @@ namespace VedaVerk.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> CheckAvailability(int productId, int quantity)
+		{
+			var product = await _productsRepository.GetByIdAsync(productId);
+			if (product == null)
+				return NotFound("Product not found.");
+
+			if (quantity <= 0)
+				return BadRequest("Quantity must be greater than zero.");
+
+			if (quantity > product.Capacity)
+				return Ok();
+			else
+				return BadRequest("Requested quantity exceeds available capacity.");
+		}
+
+		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
 			var products = await _productsRepository.GetAllAsync();
