@@ -30,5 +30,13 @@ namespace VedaVerk.Client.Services.Implementations
 
 			return response.IsSuccessStatusCode;
 		}
+
+		public async Task<List<TimeSlotDTO>> GetAvailableSlotsAsync(int productId, DateTime date)
+		{
+			string dateString = date.ToString("yyyy-MM-dd");
+			var response = await _httpClient.GetFromJsonAsync<List<TimeSlotDTO>>($"/api/Bookings/available-slots?productId={productId}&date={dateString}");
+
+			return response ?? [];
+		}
 	}
 }

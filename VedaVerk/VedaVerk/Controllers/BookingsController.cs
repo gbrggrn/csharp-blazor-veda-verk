@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using VedaVerk.Client.Services.Implementations;
 using VedaVerk.Models.Enitites;
 using VedaVerk.Repositiories.Interfaces;
 using VedaVerk.Shared;
@@ -8,14 +9,23 @@ using VedaVerk.Shared.DTOs;
 
 namespace VedaVerk.Controllers
 {
-	public class BookingsController(IRepository<Product> productsrepository, IRepository<Booking> bookingsRepository) : Controller
+	public class BookingsController(IRepository<Product> productsrepository, IRepository<Booking> bookingsRepository, BookingService bookingService) : Controller
 	{
 		private readonly IRepository<Product> _productsRepository = productsrepository;
 		private readonly IRepository<Booking> _bookingsRepository = bookingsRepository;
+		private readonly BookingService _bookingService = bookingService;
 
 		public IActionResult Index()
 		{
 			return View();
+		}
+
+		[HttpGet("slots/{productId}")]
+		public async Task<ActionResult<List<TimeSlotDTO>>> GetSlots(int productId, [FromQuery] DateTime date)
+		{
+			var slots = await _bookingService.GetAvailableSlotsAsync(productId, date);
+
+			return Ok(slots);
 		}
 
 		[HttpPost]

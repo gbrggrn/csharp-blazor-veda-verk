@@ -1,5 +1,146 @@
-﻿<h3>BookingModal</h3>
+﻿@inject IBookingService BookingService
+
+<h3>BookingModal</h3>
+
+@if (Product != null)
+{
+    <div class="modal show d-block animate-fade-in" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-lg animate-zoom-in">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Boka @Product.Name</h5>
+                    <button type="button" class="btn-close" @onclick="OnClose"></button>
+                </div>
+
+                <div class="modal-body">
+                    <EditForm Model="bookingModel" OnValidSubmit="HandleBooking">
+                        <DataAnnotationsValidator />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <BookingCard Product="Product" />
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Ditt Namn</label>
+                                    <InputText @bind-Value="bookingModel.CustomerName" class="form-control" placeholder="Anna Andersson" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <InputText @bind-Value="bookingModel.CustomerEmail" class="form-control" placeholder="anna@example.com" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Antal</label>
+                                    <InputNumber @bind-Value="bookingModel.Quantity" class="form-control" />
+                                </div>
+
+                                <input type="date" value="@selectedDate.ToString("yyyy-MM-dd")" @onchange="OnDateChanged" />
+
+                                <div class="d-flex flex-wrap gap-2 mt-3">
+                                    @if (availableSlots == null)
+                                    {
+                                        <p>Laddar...</p>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var slot in availableSlots)
+                                        {
+                                            <button type="button"
+                                                    class="btn @GetButtonClass(slot) m-1"
+                                                    disabled="@(!slot.IsAvailable)"
+                                                    @onclick="() => SelectSlot(slot)">
+
+                                                @slot.Time.ToString(@"hh\:mm")
+                                                <span class="badge bg-light text-dark ms-1">@slot.RemainingCapacity kvar</span>
+
+                                            </button>
+                                        }
+                                    }
+                                </div>
+
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-success btn-lg">
+                                        Bekräfta Bokning
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
 @code {
+    [Parameter] public ResponseProductDTO? Product { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    private CreateBookingDTO bookingModel = new();
+    private TimeSpan? SelectedTime { get; set; }
+    List<TimeSlotDTO> availableSlots;
+    private DateTime selectedDate = DateTime.Today;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadSlots();
+    }
+
+    private async Task LoadSlots()
+    {
+        availableSlots = await BookingService.GetAvailableSlotsAsync(Product.Id, selectedDate);
+    }
+
+    private async Task OnDateChanged(ChangeEventArgs e)
+    {
+        if (DateTime.TryParse(e.Value?.ToString(), out var newDate))
+        {
+            selectedDate = newDate;
+            bookingModel.BookingDate = newDate;
+
+            SelectedTime = null;
+            bookingModel.BookingTime = default;
+
+            await LoadSlots();
+        }
+    }
+
+    private void SelectSlot(TimeSlotDTO slot)
+    {
+        if (!slot.IsAvailable)
+            return;
+
+        SelectedTime = slot.Time;
+        bookingModel.BookingTime = slot.Time;
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (Product != null)
+        {
+            bookingModel = new CreateBookingDTO
+            {
+                ProductId = Product.Id,
+                Quantity = 1
+            };
+        }
+    }
+
+    private async Task HandleBooking()
+    {
+        await BookingService.Create(bookingModel);
+
+        await OnClose.InvokeAsync();
+    }
+
+    private string GetButtonClass(TimeSlotDTO slot)
+    {
+        if (!slot.IsAvailable) return "btn-secondary opacity-50";
+        if (SelectedTime == slot.Time) return "btn-primary";
+        return "btn-outline-primary";
+    }
 }

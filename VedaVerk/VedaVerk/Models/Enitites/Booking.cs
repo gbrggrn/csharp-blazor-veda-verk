@@ -6,9 +6,12 @@ namespace VedaVerk.Models.Enitites
 	{
 		public int Id { get; set; }
 
-		// Boking details
+		// Booking details
 		[Required] public DateTime BookingDate { get; set; }
 		[Required] public Product? Product { get; set; }
+
+		// Pickup time
+		[Required] public TimeSpan BookingTime { get; set; }
 
 		// Customer details
 		[Required] public string CustomerName { get; set; } = string.Empty;

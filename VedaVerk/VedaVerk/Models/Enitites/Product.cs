@@ -12,5 +12,10 @@ namespace VedaVerk.Models.Enitites
 		[Required] public int Capacity { get; set; }
 		public ProductType Type { get; set; }
 		public string? ImageUrl { get; set; }
+
+		[Required] public TimeSpan OpenTime { get; set; }
+		[Required] public TimeSpan CloseTime { get; set; }
+		[Required] public double IntervalMinutes { get; set; }
+		[Required] public int CapacityPerSlot { get; set; }
 	}
 }

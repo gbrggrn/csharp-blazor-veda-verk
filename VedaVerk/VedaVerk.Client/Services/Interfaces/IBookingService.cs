@@ -7,5 +7,6 @@ namespace VedaVerk.Client.Services.Interfaces
 		Task<bool> Create(CreateBookingDTO dto);
 		Task<bool> Cancel(int id, Guid token);
 		Task<bool> Delete(int id);
+		Task<List<TimeSlotDTO>> GetAvailableSlotsAsync(int productId, DateTime date);
 	}
 }

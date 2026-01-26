@@ -8,6 +8,7 @@ namespace VedaVerk.Shared.DTOs
 {
 	public class ResponseBookingDTO
 	{
+		public int Id { get; set; }
 		public DateTime BookingDate { get; set; }
 		public int ProductId { get; set; }
 		public string? CustomerName { get; set; }
