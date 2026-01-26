@@ -22,5 +22,11 @@ namespace VedaVerk.Models.Enitites
 
 		// State properties
 		public bool IsActive { get; set; } = false;
+
+		// Audit properties
+		[Required] public DateTime Created { get; set; } = DateTime.UtcNow;
+		[Required] public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
+		[Required] public DateTime ActiveFrom { get; set; }
+		[Required] public DateTime ActiveTo { get; set; }
 	}
 }
