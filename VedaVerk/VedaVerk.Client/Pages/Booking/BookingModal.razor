@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-xl animate-zoom-in">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
-                    <h5 class="modal-title fw-bold">Boka upplevelse</h5>
+                    <h5 class="modal-title fw-bold">Bokning</h5>
                     <button type="button" class="btn-close" @onclick="OnClose"></button>
                 </div>
 
@@ -55,6 +55,8 @@
                                     <div class="mb-3">
                                         <input type="date" class="form-control"
                                                value="@selectedDate.ToString("yyyy-MM-dd")"
+                                               min="@minDate"
+											   max="@maxDate"
                                                @onchange="OnDateChanged" />
                                     </div>
 
@@ -135,6 +137,9 @@
     List<TimeSlotDTO>? availableSlots;
     private DateTime selectedDate = DateTime.Today;
 
+    private string minDate = string.Empty;
+    private string maxDate = string.Empty;
+
     protected override async Task OnParametersSetAsync()
     {
         if (Product != null)
@@ -151,6 +156,16 @@
 
             SelectedTime = null;
             availableSlots = null;
+
+            var today = DateTime.Today;
+
+			int currentDayValue = (today.DayOfWeek == DayOfWeek.Sunday) ? 7 : (int)today.DayOfWeek;
+
+			int diff = 1 - currentDayValue; // Assuming week starts on Monday
+
+            var startOfWeek = today.AddDays(diff);
+            minDate = startOfWeek.ToString("yyyy-MM-dd");
+			maxDate = startOfWeek.AddDays(6).ToString("yyyy-MM-dd");
         }
         await LoadSlots();
     }
