@@ -11,9 +11,8 @@ namespace VedaVerk.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class BookingsController(IRepository<Product> productsrepository, IRepository<Booking> bookingsRepository, BookingService bookingService) : Controller
+	public class BookingsController(IRepository<Booking> bookingsRepository, BookingService bookingService) : Controller
 	{
-		private readonly IRepository<Product> _productsRepository = productsrepository;
 		private readonly IRepository<Booking> _bookingsRepository = bookingsRepository;
 		private readonly BookingService _bookingService = bookingService;
 

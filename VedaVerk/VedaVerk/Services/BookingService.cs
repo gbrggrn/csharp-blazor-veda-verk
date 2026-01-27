@@ -21,8 +21,9 @@ namespace VedaVerk.Services
 				.ToList();
 
 			var result = new List<TimeSlotDTO>();
+			var interval = TimeSpan.FromMinutes(product.IntervalMinutes);
 
-			for (var time = product.OpenTime; time < product.CloseTime; time.Add(TimeSpan.FromMinutes(product.IntervalMinutes)))
+			for (var time = product.OpenTime; time < product.CloseTime; time = time.Add(interval))
 			{
 				int count = bookings.Count(b => b.BookingDate.TimeOfDay == time);
 
