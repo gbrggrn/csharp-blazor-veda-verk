@@ -31,6 +31,7 @@ namespace VedaVerk.Client
 
 			builder.Services.AddScoped<IProductService, ProductService>();
 			builder.Services.AddScoped<IBookingService, BookingService>();
+            builder.Services.AddScoped<IUploadService, UploadService>();
 
 			await builder.Build().RunAsync();
         }
