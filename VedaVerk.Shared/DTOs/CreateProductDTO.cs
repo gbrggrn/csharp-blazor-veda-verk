@@ -23,8 +23,6 @@ namespace VedaVerk.Shared.DTOs
 
 		[Required(ErrorMessage = "Ange total kapacitet.")]
 		public int Capacity { get; set; }
-
-		[Required(ErrorMessage = "Produkten behöver en representativ bild.")]
 		public string? ImageUrl { get; set; }
 		public ProductType Type { get; set; }
 		public bool IsActive { get; set; }

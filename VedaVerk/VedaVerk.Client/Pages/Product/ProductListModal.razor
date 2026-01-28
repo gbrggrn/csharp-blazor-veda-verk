@@ -8,7 +8,8 @@
                 </div>
                 
                 <div class="modal-body">
-                    @if (Products.Any())
+                    @{ var activeProducts = Products.Where(p => p.IsActive == true); }
+                    @if (activeProducts.Any())
                     {
                         <div class="row g-3">
                             @foreach (var p in Products)
