@@ -93,6 +93,14 @@ h1:focus {
     box-shadow: inset 0 -1px 0 white;
 }
 
+.homep-bg {
+    background-color: #C1BCAC;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
 .overlap-container {
     transform: translateY(-15%);
     position: relative;
@@ -107,15 +115,39 @@ h1:focus {
     transition: transform 0.3s ease;
 }
 
+@font-face {
+    font-family: "Work Sans";
+    src: url('fonts/WorkSans-VariableFont_wght.ttf') format('truetype')
+}
+
+.title-text {
+    color: #214E34;
+    font-family: 'Work Sans';
+}
+
+.footer-text {
+    color: #214E34;
+    font-family: 'Work Sans';
+}
+
+.sub-title-text {
+    color: #5C7457;
+    font-family: 'Work Sans'
+}
+
+.card-text {
+    color: #214E34;
+    font-family: 'Work Sans';
+}
+
 .category-card {
     position: relative;
     cursor: pointer;
     overflow: hidden;
     transition: transform 0.3s ease;
-    border-radius: 10px;
-    height: 250px;
-    background-color: white;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 0px;
+    height: 275px;
+    background-color: transparent;
 }
 
     .category-card:hover {
@@ -130,11 +162,11 @@ h1:focus {
 
     .category-card .overlay {
         position: absolute;
+        top: 230px;
         bottom: 0;
         left: 0;
         width: 100%;
-        background: rgba(0,0,0,0.6);
-        color: white;
+        background: transparent;
         padding: 15px;
         text-align: center;
     }
