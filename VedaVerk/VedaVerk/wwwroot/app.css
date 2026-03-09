@@ -130,6 +130,11 @@ h1:focus {
     font-family: 'Work Sans';
 }
 
+.header-text {
+    color: #F4F2E9;
+    font-family: 'Work Sans';
+}
+
 .sub-title-text {
     color: #5C7457;
     font-family: 'Work Sans'
@@ -239,4 +244,8 @@ h1:focus {
     cursor: auto;
     border-radius: 0px;
     background-color: transparent;
+}
+
+.veda-header {
+    background-color: #3F601B;
 }

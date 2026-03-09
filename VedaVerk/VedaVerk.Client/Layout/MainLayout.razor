@@ -2,10 +2,13 @@
 
 <div class="page d-flex flex-column min-vh-100 homep-bg">
     <!-- Header -->
-    <div class="d-flex align-items-start justify-content-center text-center">
+    <div class="veda-header d-flex align-items-start justify-content-center text-center">
         <div class="content-overlay mt-5 mb-4">
-            <h1 class="display-2 fw-bold title-text">Veda Verk</h1>
-            <p class="lead fw-normal sub-title-text">Småskalig trädgårdsodling och mathantverk</p>
+            <h1 class="display-2 header-text">Veda Verk</h1>
+            <p class="lead fw-normal header-text mb-3">Småskalig trädgårdsodling och mathantverk på Väddö</p>
+            <NavLink href="" class="header-text text-decoration-none">Hem</NavLink>
+            <NavLink href="/about" class="header-text px-4 text-decoration-none">Om Veda Verk</NavLink>
+            <NavLink href="/contact" class="header-text text-decoration-none">Kontakt</NavLink>
         </div>
     </div>
 
@@ -39,8 +42,6 @@
 
             <!-- Footer nav -->
             <div class="footer-nav mb-3 d-flex justify-content-center gap-3 flex-wrap">
-                <NavLink href="" class="footer-text text-decoration-none">Home</NavLink>
-                <NavLink href="/about" class="footer-text text-decoration-none">About</NavLink>
                 <NavLink href="/privacy" class="footer-text text-decoration-none">Privacy</NavLink>
 
                 <AuthorizeView>
@@ -55,7 +56,7 @@
                         </form>
                     </Authorized>
                     <NotAuthorized>
-                        <a href="Account/Login" class="footer-text text-decoration-none" target="_top">Login</a>
+                        <a href="Account/Login" class="footer-text text-decoration-none" target="_top">Logga in</a>
                     </NotAuthorized>
                 </AuthorizeView>
 
