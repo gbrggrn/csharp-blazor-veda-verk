@@ -159,18 +159,6 @@ h1:focus {
         text-decoration: none;
     }
 
-.btn-veda-verk {
-    background-color: #979B8D;
-    color: #214E34;
-    font-weight: bold;
-    font-family: 'Work Sans';
-    transition: transform 0.2s ease;
-}
-    
-    .btn-veda-verk:hover {
-        transform: scale(1.05);
-    }
-
 .btn-veda-inactive {
     background-color: #979B8D;
     border-color: #214E34;
@@ -227,7 +215,7 @@ h1:focus {
     text-align: center;
 }
 
-.homep-btn {
+.btn-veda-verk {
     min-width: 300px;
     min-height: 50px;
     border-radius: 50px;
@@ -241,11 +229,11 @@ h1:focus {
     transition: transform 0.3s ease;
 }
 
-    .homep-btn:hover {
+    .btn-veda-verk:hover {
         transform: scale(1.02);
     }
 
-    .homep-btn:disabled {
+    .btn-veda-verk:disabled {
         opacity: 50%;
     }
 
@@ -303,4 +291,14 @@ h1:focus {
 
 .veda-header {
     background-color: #3F601B;
+}
+
+.veda-modal-bg {
+    background-color: #FFFFFF;
+}
+
+.veda-product-card {
+    background-color: #F5F3EA;
+    border: none;
+
 }
