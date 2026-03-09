@@ -1,5 +1,7 @@
 # Veda Verk
 
+![Veda Verk Homepage](/readme-img/veda-verk-homep.png)
+
 ## Context
 
 * **Origin** Developed as a website and resource management system for my market garden.
