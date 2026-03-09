@@ -4,9 +4,9 @@
 {
     <div class="modal show d-block animate-fade-in" style="background-color: rgba(0,0,0,0.5);">
         <div class="modal-dialog modal-xl animate-zoom-in">
-            <div class="modal-content" style="background-color: #E1DED3">
+            <div class="modal-content" style="background-color: #F5F3EA">
                 <div class="modal-header border-bottom-0">
-                    <h5 class="modal-title title-text fw-bold">Bokning</h5>
+                    <h5 class="modal-title card-text fs-3">Bokning</h5>
                     <button type="button" class="btn-close" @onclick="OnClose"></button>
                 </div>
 
@@ -17,32 +17,32 @@
                         <div class="row g-4">
 
                             <div class="col-md-5 col-lg-4">
-                                <div class="card bg-light border-0 h-100">
+                                <div class="card border-0 h-100" style="background-color: #FFFFFF">
                                     @if (!string.IsNullOrEmpty(Product.ImageUrl))
                                     {
                                         <img src="@Product.ImageUrl" class="card-img-top" style="height: 150px; object-fit: cover;" alt="@Product.Name">
                                     }
                                     <div class="card-body">
-                                        <h4 class="card-title title-text mb-3">@Product.Name</h4>
-                                        <p class="card-text sub-title-text small">@Product.Description</p>
+                                        <h4 class="card-title card-text mb-3">@Product.Name</h4>
+                                        <p class="card-text small">@Product.Description</p>
 
                                         <hr class="my-3" />
 
                                         <div class="mb-3">
-                                            <small class="text-uppercase title-text fw-bold" style="font-size: 0.75rem;">Valt Datum</small>
-                                            <div class="fs-5 sub-title-text">@bookingModel.BookingDate?.ToString("yyyy-MM-dd" ?? "-")</div>
+                                            <small class="text-uppercase card-text" style="font-size: 0.75rem;">Valt Datum</small>
+                                            <div class="fs-5 card-text">@bookingModel.BookingDate?.ToString("yyyy-MM-dd" ?? "-")</div>
                                         </div>
 
                                         <div class="mb-3">
-                                            <small class="text-uppercase title-text fw-bold" style="font-size: 0.75rem;">Vald Tid</small>
-                                            <div class="fs-5 fw-bold sub-title-text @(bookingModel.BookingTime.HasValue ? "text-success" : "text-muted fst-italic")">
+                                            <small class="text-uppercase card-text" style="font-size: 0.75rem;">Vald Tid</small>
+                                            <div class="fs-5 fw-bold card-text @(bookingModel.BookingTime.HasValue ? "text-success" : "text-muted fst-italic")">
                                                 @(bookingModel.BookingTime.HasValue? bookingModel.BookingTime.Value.ToString("HH:mm") : "-")
                                             </div>
                                         </div>
 
                                         <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
-                                            <span class="fw-bold sub-title-text">Pris totalt:</span>
-                                            <span class="fs-4 fw-bold title-text">@Product.Price kr</span>
+                                            <span class="fw-bold card-text">Pris totalt:</span>
+                                            <span class="fs-4 fw-bold card-text">@Product.Price kr</span>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
 
                             <div class="col-md-7 col-lg-8">
                                 <div class="p-2">
-                                    <label class="form-label small fw-bold text-uppercase title-text mb-3">Välj Datum</label>
+                                    <label class="form-label small card-text fs-4 mb-3">Välj Datum</label>
                                     
                                     <div class="d-flex gap-2 overflow-auto pb-2" style="white-space: nowrap;">
 
@@ -77,8 +77,8 @@
                                     <div class="mb-4">
                                         @if (availableSlots == null)
                                         {
-                                            <div class="spinner-border text-primary spinner-border-sm" role="status"></div>
-                                            <span class="ms-2 sub-title-text">Laddar tider...</span>
+                                            <div class="spinner-border card-text text-muted spinner-border-sm" role="status"></div>
+                                            <span class="ms-2 card-text text-muted">Laddar tider...</span>
                                         }
                                         else if (!availableSlots.Any())
                                         {
