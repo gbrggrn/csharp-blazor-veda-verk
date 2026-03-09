@@ -145,6 +145,20 @@ h1:focus {
     font-family: 'Work Sans';
 }
 
+.veda-basic-link-btn {
+    text-decoration: none;
+    color: white;
+    font-family: 'Work Sans';
+    transition: transform 0.2s ease;
+    border: none;
+    background-color: transparent;
+}
+
+    .veda-basic-link-btn:hover {
+        transform: scale(1.05);
+        text-decoration: none;
+    }
+
 .btn-veda-verk {
     background-color: #979B8D;
     color: #214E34;
