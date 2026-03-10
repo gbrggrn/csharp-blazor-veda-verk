@@ -35,7 +35,7 @@
 
                                         <div class="mb-3">
                                             <small class="text-uppercase card-text" style="font-size: 0.75rem;">Vald Tid</small>
-                                            <div class="fs-5 fw-bold card-text @(bookingModel.BookingTime.HasValue ? "text-success" : "text-muted fst-italic")">
+                                            <div class="fs-5 card-text @(bookingModel.BookingTime.HasValue ? "text-success" : "text-muted fst-italic")">
                                                 @(bookingModel.BookingTime.HasValue? bookingModel.BookingTime.Value.ToString("HH:mm") : "-")
                                             </div>
                                         </div>
@@ -50,7 +50,7 @@
 
                             <div class="col-md-7 col-lg-8">
                                 <div class="p-2">
-                                    <label class="form-label card-text fs-4 mb-3">1. Välj datum</label>
+                                    <label class="form-label card-text fs-4 mb-3">1. Välj datum och tid</label>
                                     
                                     <div class="d-flex gap-2 overflow-auto pb-2" style="white-space: nowrap;">
 
@@ -90,12 +90,12 @@
                                                 @foreach (var slot in availableSlots)
                                                 {
                                                     <button type="button"
-                                                            class="btn @GetButtonClass(slot) d-flex flex-column align-items-center py-2 px-3"
+                                                            class="btn @GetButtonClass(slot) btn-veda-available d-flex flex-column align-items-center py-2 px-3"
                                                             style="min-width: 80px;"
                                                             disabled="@(!slot.IsAvailable)"
                                                             @onclick="() => SelectSlot(slot)">
 
-                                                        <span class="fw-bold">@slot.Time.ToString(@"hh\:mm")</span>
+                                                        <span class="card-text">@slot.Time.ToString(@"hh\:mm")</span>
                                                     </button>
                                                 }
                                             </div>
@@ -243,8 +243,11 @@
 
     private string GetButtonClass(TimeSlotDTO slot)
     {
-        if (!slot.IsAvailable) return "btn-veda-inactive";
-        if (SelectedTime == slot.Time) return "btn-veda-available";
-        return "btn-veda-available";
+        if (!slot.IsAvailable) 
+            return "disabled";
+        if (SelectedTime == slot.Time)
+            return "border-4";
+
+        return "";
     }
 }
