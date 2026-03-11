@@ -12,10 +12,10 @@
 <PageTitle>Admin Login | VedaVerk</PageTitle>
 
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="card shadow-lg border-0" style="width: 100%; max-width: 400px;">
-        <div class="card-header bg-primary text-white text-center py-4">
-            <h3 class="mb-0 fw-bold">VedaVerk Admin</h3>
-            <small>Logga in för att hantera systemet</small>
+    <div class="card shadow-lg border-0" style="width: 100%; max-width: 400px; background-color: #F5F3EA">
+        <div class="card-header card-text text-center py-4" style="background-color: #3F601B">
+            <h3 class="mb-0 card-text text-white">Veda verk admin</h3>
+            <small class="card-text text-white">Logga in för att hantera systemet</small>
         </div>
 
         <div class="card-body p-4">
@@ -31,31 +31,31 @@
 
                 <div class="form-floating mb-3">
                     <InputText @bind-Value="Input.Email" id="email" class="form-control" placeholder="name@example.com" autocomplete="username" aria-required="true" />
-                    <label for="email">Email</label>
+                    <label for="email" class="card-text">Email</label>
                     <ValidationMessage For="() => Input.Email" class="text-danger small" />
                 </div>
 
                 <div class="form-floating mb-3">
                     <InputText @bind-Value="Input.Password" type="password" id="password" class="form-control" placeholder="Lösenord" autocomplete="current-password" aria-required="true" />
-                    <label for="password">Lösenord</label>
+                    <label for="password" class="card-text">Lösenord</label>
                     <ValidationMessage For="() => Input.Password" class="text-danger small" />
                 </div>
 
                 <div class="form-check mb-4">
                     <InputCheckbox @bind-Value="Input.RememberMe" class="form-check-input" id="rememberMe" />
-                    <label class="form-check-label text-muted" for="rememberMe">
+                    <label class="form-check-label card-text text-muted" for="rememberMe">
                         Kom ihåg mig
                     </label>
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">Logga In</button>
+                    <button type="submit" class="btn btn-veda-verk btn-lg">Logga In</button>
                 </div>
             </EditForm>
         </div>
 
         <div class="card-footer text-center bg-light py-3">
-            <small class="text-muted">Problem att logga in? Kontakta teknisk support.</small>
+            <small class="text-muted card-text">Problem att logga in? Kontakta teknisk support.</small>
         </div>
     </div>
 </div>
